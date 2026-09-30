@@ -1,0 +1,7 @@
+{
+  "name": "Nighton",
+  "description": "AI mentor for children with a parent safety and insights layer.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+

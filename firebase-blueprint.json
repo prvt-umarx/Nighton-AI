@@ -1,0 +1,155 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "User profile for Parent or Child account",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "email": { "type": "string" },
+        "displayName": { "type": "string", "maxLength": 100 },
+        "role": { "type": "string", "enum": ["parent", "child"] },
+        "parentId": { "type": "string", "maxLength": 128 },
+        "avatar": { "type": "string", "maxLength": 50 },
+        "age": { "type": "number" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "displayName", "role"]
+    },
+    "ChildLink": {
+      "title": "ChildLink",
+      "description": "Child profile linked to parent",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "parentId": { "type": "string", "maxLength": 128 },
+        "childUid": { "type": "string", "maxLength": 128 },
+        "name": { "type": "string", "maxLength": 100 },
+        "username": { "type": "string", "maxLength": 50 },
+        "avatar": { "type": "string", "maxLength": 50 },
+        "age": { "type": "number" },
+        "learningMinutesThisWeek": { "type": "number" },
+        "currentMood": { "type": "string", "enum": ["positive", "neutral", "needs_attention"] },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "parentId", "name"]
+    },
+    "Conversation": {
+      "title": "Conversation",
+      "description": "Chat session between child and Nighton AI mentor",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "childId": { "type": "string", "maxLength": 128 },
+        "parentId": { "type": "string", "maxLength": 128 },
+        "title": { "type": "string", "maxLength": 150 },
+        "topic": { "type": "string", "maxLength": 100 },
+        "messageCount": { "type": "number" },
+        "lastMessageAt": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "childId", "title"]
+    },
+    "ChatMessage": {
+      "title": "ChatMessage",
+      "description": "Individual message in a conversation",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "conversationId": { "type": "string", "maxLength": 128 },
+        "childId": { "type": "string", "maxLength": 128 },
+        "sender": { "type": "string", "enum": ["child", "nighton", "system"] },
+        "text": { "type": "string", "maxLength": 4000 },
+        "moodDetected": { "type": "string", "enum": ["positive", "neutral", "needs_attention", "curious", "proud"] },
+        "safetyFlag": { "type": "string" },
+        "timestamp": { "type": "string" }
+      },
+      "required": ["id", "conversationId", "sender", "text"]
+    },
+    "ChildGoal": {
+      "title": "ChildGoal",
+      "description": "Learning and personal development goals for child",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "childId": { "type": "string", "maxLength": 128 },
+        "parentId": { "type": "string", "maxLength": 128 },
+        "title": { "type": "string", "maxLength": 200 },
+        "category": { "type": "string", "enum": ["learning", "kindness", "health", "creativity", "routine"] },
+        "completed": { "type": "boolean" },
+        "targetDays": { "type": "number" },
+        "completedAt": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "childId", "title", "completed"]
+    },
+    "SafetyAlert": {
+      "title": "SafetyAlert",
+      "description": "Parent safety alert flagged by Nighton mentor system",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "childId": { "type": "string", "maxLength": 128 },
+        "parentId": { "type": "string", "maxLength": 128 },
+        "childName": { "type": "string", "maxLength": 100 },
+        "category": { "type": "string", "enum": ["bullying", "self_harm", "dangerous_topics", "distress", "inappropriate_contact"] },
+        "severity": { "type": "string", "enum": ["low", "medium", "high"] },
+        "summary": { "type": "string", "maxLength": 500 },
+        "recommendation": { "type": "string", "maxLength": 1000 },
+        "status": { "type": "string", "enum": ["unread", "acknowledged", "resolved"] },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "childId", "parentId", "category", "severity", "status"]
+    },
+    "ParentInsight": {
+      "title": "ParentInsight",
+      "description": "High-level aggregate insight metrics for parent dashboard",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "parentId": { "type": "string", "maxLength": 128 },
+        "childId": { "type": "string", "maxLength": 128 },
+        "childName": { "type": "string", "maxLength": 100 },
+        "weekStartDate": { "type": "string" },
+        "learningMinutes": { "type": "number" },
+        "goalsCompleted": { "type": "number" },
+        "goalsTotal": { "type": "number" },
+        "moodTrend": { "type": "string", "enum": ["positive", "neutral", "needs_attention"] },
+        "highlightSummary": { "type": "string", "maxLength": 500 },
+        "suggestedTopics": { "type": "string", "maxLength": 500 },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "parentId", "childId", "learningMinutes", "moodTrend"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/UserProfile" },
+      "description": "Parent and child profile records"
+    },
+    "/children/{childId}": {
+      "schema": { "$ref": "#/entities/ChildLink" },
+      "description": "Child accounts linked to parent"
+    },
+    "/conversations/{conversationId}": {
+      "schema": { "$ref": "#/entities/Conversation" },
+      "description": "Child conversation sessions"
+    },
+    "/conversations/{conversationId}/messages/{messageId}": {
+      "schema": { "$ref": "#/entities/ChatMessage" },
+      "description": "Messages inside conversation"
+    },
+    "/goals/{goalId}": {
+      "schema": { "$ref": "#/entities/ChildGoal" },
+      "description": "Goals set by child and parent"
+    },
+    "/safetyAlerts/{alertId}": {
+      "schema": { "$ref": "#/entities/SafetyAlert" },
+      "description": "Safety flags visible to parents"
+    },
+    "/parentInsights/{insightId}": {
+      "schema": { "$ref": "#/entities/ParentInsight" },
+      "description": "Aggregated insights and weekly summary for parents"
+    }
+  }
+}
