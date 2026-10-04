@@ -5,7 +5,8 @@ import { ChildChat } from './components/ChildChat';
 import { ParentDashboard } from './components/ParentDashboard';
 import { AuthModal } from './components/AuthModal';
 import { AddChildModal } from './components/AddChildModal';
-import { ShieldCheck, Heart, Sparkles } from 'lucide-react';
+import { NightonLogo } from './components/NightonLogo';
+import { ShieldCheck, Heart } from 'lucide-react';
 
 const AppContent: React.FC = () => {
   const { activeRole, user, userProfile } = useAuth();
@@ -33,7 +34,7 @@ const AppContent: React.FC = () => {
       <footer className="bg-white border-t border-slate-200/80 py-3 text-center text-xs text-slate-400">
         <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
           <div className="flex items-center space-x-2">
-            <span className="font-child text-sm font-bold text-indigo-700">Nighton</span>
+            <NightonLogo variant="full" color="#00205B" className="h-5 w-auto" />
             <span>• AI Mentor with Parent Safety Guardrails</span>
           </div>
           <div className="flex items-center space-x-4 text-[11px]">

@@ -7,10 +7,10 @@ import {
   User,
   Baby,
   Shield,
-  Sparkles,
   ArrowRight,
   KeyRound
 } from 'lucide-react';
+import { NightonLogo } from './NightonLogo';
 
 interface AuthModalProps {
   isOpen: boolean;
@@ -107,7 +107,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-xs p-4">
       <div className="bg-white rounded-3xl max-w-md w-full overflow-hidden shadow-2xl border border-slate-100 animate-in zoom-in-95">
         {/* Header with Close */}
-        <div className="relative bg-gradient-to-r from-indigo-900 via-indigo-800 to-purple-900 text-white p-6 text-center">
+        <div className="relative bg-gradient-to-r from-[#00205B] via-[#072B73] to-indigo-900 text-white p-6 text-center">
           <button
             onClick={onClose}
             className="absolute top-4 right-4 p-1.5 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors"
@@ -115,10 +115,9 @@ export const AuthModal: React.FC<AuthModalProps> = ({
             <X className="w-4 h-4" />
           </button>
 
-          <div className="w-12 h-12 rounded-2xl bg-white/15 backdrop-blur-sm border border-white/20 flex items-center justify-center mx-auto mb-3 shadow-inner">
-            <Sparkles className="w-6 h-6 text-amber-300" />
+          <div className="flex justify-center mb-2">
+            <NightonLogo variant="full" color="#FFFFFF" className="h-10 w-auto" />
           </div>
-          <h2 className="font-child text-2xl font-bold">Welcome to Nighton</h2>
           <p className="text-xs text-indigo-200 mt-1">
             Sign in to your parent dashboard or child mentor session
           </p>

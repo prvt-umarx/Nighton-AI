@@ -30,6 +30,7 @@ import {
 } from 'lucide-react';
 import { MoodCheckinModal } from './MoodCheckinModal';
 import { GoalsModal } from './GoalsModal';
+import { NightonLogo } from './NightonLogo';
 
 const STARTER_PROMPTS = [
   { text: "Why is the sky blue during the day and red at sunset? 🌅", label: "Sky Colors" },
@@ -427,8 +428,8 @@ export const ChildChat: React.FC = () => {
                   {child.avatar || '🦊'}
                 </div>
               ) : (
-                <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-indigo-600 via-purple-600 to-amber-500 text-white flex items-center justify-center shadow-md shadow-indigo-600/20 transform hover:rotate-6 transition-transform">
-                  <Sparkles className="w-5 h-5 text-amber-200" />
+                <div className="w-10 h-10 rounded-2xl bg-[#00205B] text-white flex items-center justify-center shadow-md shadow-[#00205B]/20 transform hover:rotate-6 transition-transform">
+                  <NightonLogo variant="icon" color="#FFFFFF" className="w-6 h-6" />
                 </div>
               )}
             </div>
@@ -443,8 +444,9 @@ export const ChildChat: React.FC = () => {
             >
               {msg.sender === 'nighton' && (
                 <div className="flex items-center justify-between mb-1.5 pb-1 border-b border-slate-100">
-                  <span className="font-child text-xs font-bold tracking-wide text-indigo-700">
-                    Nighton Mentor 🦉
+                  <span className="font-child text-xs font-bold tracking-wide text-[#00205B] flex items-center gap-1.5">
+                    <NightonLogo variant="icon" color="#00205B" className="w-3.5 h-3.5" />
+                    <span>Nighton Mentor</span>
                   </span>
                   <span className="text-[10px] text-slate-400">
                     {new Date(msg.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
@@ -460,8 +462,8 @@ export const ChildChat: React.FC = () => {
         {/* Typing indicator */}
         {isTyping && (
           <div className="flex items-start gap-3 self-start animate-in fade-in">
-            <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-indigo-600 to-purple-600 text-white flex items-center justify-center shadow-md shadow-indigo-600/20">
-              <Sparkles className="w-5 h-5 text-amber-200 animate-spin" />
+            <div className="w-10 h-10 rounded-2xl bg-[#00205B] text-white flex items-center justify-center shadow-md shadow-[#00205B]/20">
+              <NightonLogo variant="icon" color="#FFFFFF" className="w-6 h-6 animate-pulse" />
             </div>
             <div className="bg-white rounded-3xl rounded-tl-xs px-5 py-4 border border-slate-200/90 shadow-xs flex items-center space-x-2">
               <span className="font-child text-xs text-indigo-600 font-bold">

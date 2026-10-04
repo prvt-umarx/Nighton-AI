@@ -2,15 +2,14 @@ import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import {
   Shield,
-  Sparkles,
   User,
   LogOut,
   ChevronDown,
   Lock,
   Baby,
-  Smile,
   Plus
 } from 'lucide-react';
+import { NightonLogo } from './NightonLogo';
 
 interface NavbarProps {
   onOpenAuth: () => void;
@@ -59,19 +58,18 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenAuth, onOpenAddChild }) =>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           {/* Logo & Brand */}
           <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-amber-400 via-orange-400 to-indigo-600 flex items-center justify-center text-white shadow-md shadow-orange-500/20 transform transition-transform hover:scale-105">
-              <Sparkles className="w-5 h-5 text-white" />
-            </div>
-            <div>
-              <div className="flex items-center space-x-2">
-                <span className="font-child text-2xl font-bold tracking-tight bg-gradient-to-r from-indigo-700 via-purple-700 to-amber-600 bg-clip-text text-transparent">
-                  Nighton
-                </span>
-                <span className="text-[10px] uppercase font-bold tracking-widest px-2 py-0.5 rounded-full bg-indigo-50 text-indigo-700 border border-indigo-200/60">
+            <NightonLogo
+              variant="full"
+              color="#00205B"
+              className="h-9 sm:h-10 w-auto transition-transform hover:scale-102"
+            />
+            <div className="hidden lg:flex flex-col border-l border-slate-200 pl-3">
+              <div className="flex items-center space-x-1.5">
+                <span className="text-[10px] uppercase font-bold tracking-widest px-2 py-0.5 rounded-full bg-[#00205B]/10 text-[#00205B] border border-[#00205B]/20">
                   AI Mentor
                 </span>
               </div>
-              <p className="text-[11px] text-slate-500 font-medium hidden sm:block">
+              <p className="text-[11px] text-slate-500 font-medium mt-0.5">
                 Gentle mentor for kids • Peace of mind for parents
               </p>
             </div>
